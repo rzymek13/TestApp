@@ -1,27 +1,34 @@
 import org.openqa.selenium.WebDriver;
+import org.testng.TestNG;
 import pages.InputFormExercises;
+import tests.BaseTest;
+import tests.InputFormTests;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class Forma extends JFrame {
     private WebDriver driver;
     private JPanel panelMain;
-    private JButton button1;
-    private JButton button2;
+    JButton button1;
+    JButton button2;
+    InputFormTests inputFormTests = new InputFormTests();
+    BaseTest baseTest = new BaseTest();
+
+
 
     public Forma() {
 
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    BaseClass.firstExerc();
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
-
+                baseTest.setup();
+                inputFormTests.simpleFormTest();
+                baseTest.tearDown();
+                JOptionPane.showMessageDialog(button1, "Test przechodzi");
 
             }
         });
@@ -29,6 +36,7 @@ public class Forma extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    BaseClass.setUpDriver();
                     BaseClass.secondExerc();
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
@@ -38,7 +46,8 @@ public class Forma extends JFrame {
     }
 
     public static void main(String[] args) {
-        BaseClass bc = new BaseClass();
+
+
         Forma f=new Forma();
         f.setContentPane(f.panelMain);
         f.setTitle("testy");

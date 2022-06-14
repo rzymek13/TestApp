@@ -12,17 +12,14 @@ public class BaseClass {
     public static WebDriver driver;
     public static String pierwszyInput = "no witam";
 
-//    @BeforeMethod
-//    public static void setUpDriver() {
-//        WebDriverManager.chromedriver().setup();
-//        driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-//    }
-    @Test
-    public static void firstExerc() throws InterruptedException {
+    @BeforeMethod
+    public static void setUpDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+    @Test
+    public static void firstExerc() throws InterruptedException {
 
         driver.get("https://demo.seleniumeasy.com/basic-first-form-demo.html");
         Thread.sleep(2000);

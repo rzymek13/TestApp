@@ -1,20 +1,18 @@
 package pages;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
+import tests.BaseTest;
 
-public class InputFormExercises {
+import static org.testng.Assert.assertEquals;
+
+public class InputFormExercises extends BaseTest {
     private WebDriver driver;
-    private String pierwszyInput = "no witam";
 
-    @FindBy(id ="at-cv-lightbox-close")
-    private WebElement closingAdv;
 
     @FindBy(id ="user-message")
     private WebElement userInputMsg;
@@ -37,22 +35,30 @@ public class InputFormExercises {
     @FindBy(id ="displayvalue")
     private WebElement resultBox2;
 
+
     public InputFormExercises(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 
 
     @Test
-    public void pierwszeZadanie() throws InterruptedException {
+    public void pierwszeZadanie(String inputMsg) {
 
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        userInputMsg.sendKeys(inputMsg);
+        showMsgBtn.click();
+        assertEquals(resultBox.getText(), inputMsg);
 
-        driver.get("https://demo.seleniumeasy.com/basic-first-form-demo.html");
-        Thread.sleep(2000);
-        closingAdv.click();
-        userInputMsg.sendKeys(pierwszyInput);
+        }
+
+
+    @Test
+    public void drugieZadanie(String firstNum, String secondNum) {
+
+        sum1.sendKeys(firstNum);
+        sum2.sendKeys(secondNum);
+        getSumBtn.click();
+        assertEquals(resultBox2.getText(), "13");
+
     }
 
 }
