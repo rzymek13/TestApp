@@ -11,7 +11,6 @@ import tests.BaseTest;
 import static org.testng.Assert.assertEquals;
 
 public class InputFormExercises extends BaseTest {
-    private WebDriver driver;
 
 
     @FindBy(id ="user-message")
